@@ -1,5 +1,3 @@
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.regex.Pattern;
 
@@ -53,12 +51,5 @@ public class AlphaNumComparator implements Comparator<String> {
 
     private boolean isIntSection(String s) {
         return (s.charAt(0) >= '0' && s.charAt(0) <= '9');
-    }
-
-    // Driving main
-    public static void main(String[] args) {
-        String[] arr = {"a1.txt", "a2.txt", "a10.txt", "a11.txt", "a20.txt", "a3.txt", "11.txt"};
-        Arrays.sort(arr, new AlphaNumComparator());
-        System.out.println(Arrays.toString(arr));
     }
 }

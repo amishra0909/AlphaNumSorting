@@ -14,3 +14,9 @@ Identified Edge cases:
 "123Abc" < "123abc"
 "1abc" < "02abc"
 "1" < "01"
+
+
+USAGE:
+HumanReadableSort --input <input_file_name> --output <output_file_name>
+
+--output is optional and irrespective of this option, program prints output on console.
