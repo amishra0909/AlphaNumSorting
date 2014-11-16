@@ -13,16 +13,16 @@ public class AlphaNumComparatorTest {
     public void testCompare_withAlphabets_returnASCIIOrder() {
         String testString1 = "abc";
         String testString2 = "cde";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
 	}
 
     @Test
     public void testCompare_withNumerics_returnsValueOrder() {
         String testString1 = "1";
         String testString2 = "2";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test(expected=NullPointerException.class)
@@ -41,8 +41,8 @@ public class AlphaNumComparatorTest {
     public void testCompare_withSameStrings_returnsNoOrder() {
         String testString1 = "testString123SameString";
         String testString2 = "testString123SameString";
-        int comparision = comparator.compare(testString1, testString2);
-        assertEquals(comparision, 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertEquals(comparison, 0);
     }
 
     // tests with basic alpha numeric strings
@@ -51,32 +51,32 @@ public class AlphaNumComparatorTest {
     public void testCompare_withCommonAlphabetPrefix_returnsOrderBasedOnNumericSuffix() {
         String testString1 = "a1";
         String testString2 = "a2";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withCommonNumericPrefix_returnsOrderBasedOnSuffixASCII() {
         String testString1 = "1a";
         String testString2 = "1b";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withCommonAlphabetSuffix_returnsOrderBasedOnNumericPrefix() {
         String testString1 = "1a";
         String testString2 = "2a";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withCommonNumericSuffix_returnsOrderBasedOnPrefixASCII() {
         String testString1 = "a1";
         String testString2 = "b1";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     // tests where commonly used special character as prefix are used,
@@ -86,32 +86,32 @@ public class AlphaNumComparatorTest {
     public void testCompare_withUnderScorePrefixed_returnsOrderBasedOnASCII() {
         String testString1 = "_a123.txt";
         String testString2 = "a123.txt";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withDashPrefixed_returnsOrderBasedOnASCII() {
         String testString1 = "-123.txt";
         String testString2 = "123.txt";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withSpacePrefixed_returnsSpaceThenNoSpaceOrder() {
         String testString1 = " abc.txt";
         String testString2 = "abc.txt";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withSpaceInterleaved_returnsSpaceThenNoSpaceOrder() {
         String testString1 = "1 2.txt";
         String testString2 = "12.txt";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     // case sensitivity tests
@@ -120,16 +120,16 @@ public class AlphaNumComparatorTest {
     public void testCompare_withDifferentCases_returnsCapitalToSmallOrder() {
         String testString1 = "abC";
         String testString2 = "abc";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withDifferentCasesInterleaved_returnsCapitalToSmallOrder() {
     	String testString1 = "same123B_Same";
     	String testString2 = "same123b_Same";
-    	int comparision = comparator.compare(testString1, testString2);
-    	assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
     
     // special case of numerics starting with 0, for example 1 should appear before 02
@@ -138,24 +138,24 @@ public class AlphaNumComparatorTest {
     public void testCompare_withNumericsStartingWithZero_returnsOrderBasedOnNumericValue() {
         String testString1 = "1.txt";
         String testString2 = "02.txt";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withInterleavedNumericsStartingWithZero_returnsOrderBasedOnNumericValue() {
         String testString1 = "same1.txt";
         String testString2 = "same02.txt";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withNumericsStartingWithZeroButSameValue_returnsOrderBasedOnLength() {
-        String testString1 = "1.txt";
-        String testString2 = "01.txt";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        String testString1 = "01.txt";
+        String testString2 = "1.txt";
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     // special cases with decimal point and numeric starting with 0
@@ -164,16 +164,15 @@ public class AlphaNumComparatorTest {
     public void testCompare_withZeroAfterDecimalPoint_returnsOrderBasedOnNumericDecimalValue() {
         String testString1 = "1.02";
         String testString2 = "1.11";
-        int comparision = comparator.compare(testString1, testString2);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 
     @Test
     public void testCompare_withZeroAfterDecimalPointButSameNumericValueAfterDecimalPoint_returnsOrderWithZeroContainingElementFirst() {
         String testString1 = "1.01";
         String testString2 = "1.1";
-        int comparision = comparator.compare(testString1, testString2);
-        System.out.println(comparision);
-        assertTrue(comparision < 0);
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
     }
 }

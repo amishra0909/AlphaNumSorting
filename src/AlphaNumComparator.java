@@ -66,9 +66,11 @@ public class AlphaNumComparator implements Comparator<String> {
             int i1 = Integer.parseInt(s1);
             int i2 = Integer.parseInt(s2);
             int diff = i1 - i2;
-            // in case when integer value of both string are same, like "1" and "01" length is the deciding factor.
+
+            // In case when integer value of both string are same ascii comparison should be returned,
+            // like in case of "1" and "01", "01" should appear first.
             if (diff == 0) {
-                diff = s1.length() - s2.length();
+                diff = s1.compareTo(s2);
             }
             return diff;
         } catch (NumberFormatException e) {
