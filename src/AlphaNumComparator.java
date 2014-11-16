@@ -16,14 +16,16 @@ public class AlphaNumComparator implements Comparator<String> {
         int index = 0;
         while (index < s1Sections.length && index < s2Sections.length) {
 
-            if (s1Sections[index].compareTo(s2Sections[index]) == 0) {
+            String section1 = s1Sections[index];
+            String section2 = s2Sections[index];
+            if (section1.compareTo(section2) == 0) {
                 index++;
                 continue;
             }
-            if (isIntSection(s1Sections[index]) && isIntSection(s2Sections[index])) {
+            if (isIntSection(section1) && isIntSection(section2)) {
                 try {
-                    int s1Integer = Integer.parseInt(s1Sections[index]);
-                    int s2Integer = Integer.parseInt(s2Sections[index]);
+                    int s1Integer = Integer.parseInt(section1);
+                    int s2Integer = Integer.parseInt(section2);
 
                     int diff = s1Integer - s2Integer;
                     if (diff != 0) {
@@ -38,7 +40,7 @@ public class AlphaNumComparator implements Comparator<String> {
                     throw new RuntimeException(e);
                 }
             } else {
-                return s1Sections[index].compareTo(s2Sections[index]);
+                return section1.compareTo(section2);
             }
 
         }
