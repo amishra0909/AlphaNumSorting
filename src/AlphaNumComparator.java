@@ -3,8 +3,9 @@ import java.util.regex.Pattern;
 
 public class AlphaNumComparator implements Comparator<String> {
 
-    // referred to following stackoverflow link to get pattern string:
+    // Referred to following stackoverflow link to get pattern string:
     // http://stackoverflow.com/questions/8270784/how-to-split-a-string-between-letters-and-digits-or-between-digits-and-letters
+    // This regex will split the string into arrays of sub-strings with numerics separated from sub-strings of other characters.
     private static final Pattern regex = Pattern.compile("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
 
     @Override
