@@ -4,16 +4,18 @@ This project aims at providing a human readable sorting solution of the above ki
 The idea is to be able to split the string into sections of alphabets and numerics and sort based on the sections. Alphabetic parts are compared using the ASCII value of characters in consideration and numeric parts should be compared using the absolute value of the number.
 
 Identified Edge cases:
-"a1" < "a2"
-"1a" < "2a"
-"aB" < "ab"
-"_abc123" < "abc123"
-"-123" < "123"
-" 123" < "123"
-"1 2" < "12"
-"123Abc" < "123abc"
-"1abc" < "02abc"
-"1" < "01"
+"a1" < "a2",
+"1a" < "2a",
+"aB" < "ab",
+"_abc123" < "abc123",
+"-123" < "123",
+" 123" < "123",
+"1 2" < "12",
+"123Abc" < "123abc",
+"1abc" < "02abc",
+"1" < "01",
+"1.01" < "1.1",
+"1.01" < "1.02"
 
 
 USAGE:
