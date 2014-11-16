@@ -19,8 +19,8 @@ public class AlphaNumComparatorTest {
 
     @Test
     public void testCompare_withNumerics_returnsValueOrder() {
-        String testString1 = "1";
-        String testString2 = "2";
+        String testString1 = "2";
+        String testString2 = "10";
         int comparison = comparator.compare(testString1, testString2);
         assertTrue(comparison < 0);
     }
@@ -172,6 +172,22 @@ public class AlphaNumComparatorTest {
     public void testCompare_withZeroAfterDecimalPointButSameNumericValueAfterDecimalPoint_returnsOrderWithZeroContainingElementFirst() {
         String testString1 = "1.01";
         String testString2 = "1.1";
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
+    }
+
+    @Test
+    public void testCompare_withStringsStartingFromDecimalPoint_returnsOrderBasedOnFloatValue() {
+        String testString1 = ".01";
+        String testString2 = ".1";
+        int comparison = comparator.compare(testString1, testString2);
+        assertTrue(comparison < 0);
+    }
+
+    @Test
+    public void testCompare_withDecimalPointInterleavedWithAlpha_returnsOrderBasedOnIntegerComponent() {
+        String testString1 = "a.9";
+        String testString2 = "a.10";
         int comparison = comparator.compare(testString1, testString2);
         assertTrue(comparison < 0);
     }

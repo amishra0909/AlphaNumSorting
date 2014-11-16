@@ -26,7 +26,7 @@ public class AlphaNumComparator implements Comparator<String> {
             if (isNumSection(section1) && isNumSection(section2)) {
                 int diff = 0;
                 // check for special case of floating point
-                if (index > 0 && s1Sections[index-1].endsWith(".") && s2Sections[index-1].endsWith(".")) {
+                if (index > 0 && s1Sections[index-1].equals(".") && s2Sections[index-1].equals(".")) {
                     diff = diffAsFloats(section1, section2);
                 } else {
                     diff = diffAsIntegers(section1, section2);
