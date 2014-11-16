@@ -157,4 +157,23 @@ public class AlphaNumComparatorTest {
         int comparision = comparator.compare(testString1, testString2);
         assertTrue(comparision < 0);
     }
+
+    // special cases with decimal point and numeric starting with 0
+
+    @Test
+    public void testCompare_withZeroAfterDecimalPoint_returnsOrderBasedOnNumericDecimalValue() {
+        String testString1 = "1.02";
+        String testString2 = "1.11";
+        int comparision = comparator.compare(testString1, testString2);
+        assertTrue(comparision < 0);
+    }
+
+    @Test
+    public void testCompare_withZeroAfterDecimalPointButSameNumericValueAfterDecimalPoint_returnsOrderWithZeroContainingElementFirst() {
+        String testString1 = "1.01";
+        String testString2 = "1.1";
+        int comparision = comparator.compare(testString1, testString2);
+        System.out.println(comparision);
+        assertTrue(comparision < 0);
+    }
 }

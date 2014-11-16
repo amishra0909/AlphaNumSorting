@@ -22,23 +22,16 @@ public class AlphaNumComparator implements Comparator<String> {
                 index++;
                 continue;
             }
-            if (isIntSection(section1) && isIntSection(section2)) {
-                try {
-                    int s1Integer = Integer.parseInt(section1);
-                    int s2Integer = Integer.parseInt(section2);
-
-                    int diff = s1Integer - s2Integer;
-                    if (diff != 0) {
-                    	return diff;
-                    }
-                    index++;
-                    continue;
-                } catch (NumberFormatException e) {
-                	// naive logging : just put a warning statement on console and throw exception;
-                    System.out.println("ERROR: one of string cannot be parsed as number (execution should not reach here).");
-                    System.out.println(e.getMessage());
-                    throw new RuntimeException(e);
+            if (isNumSection(section1) && isNumSection(section2)) {
+                int diff = 0;
+                // check for special case of floating point
+                if (index > 0 && s1Sections[index-1].endsWith(".") && s2Sections[index-1].endsWith(".")) {
+                    diff = diffAsFloats(section1, section2);
+                } else {
+                    diff = diffAsIntegers(section1, section2);
                 }
+
+                return diff;
             } else {
                 return section1.compareTo(section2);
             }
@@ -51,7 +44,37 @@ public class AlphaNumComparator implements Comparator<String> {
         return s1.length() - s2.length();
     }
 
-    private boolean isIntSection(String s) {
+    private boolean isNumSection(String s) {
         return (s.charAt(0) >= '0' && s.charAt(0) <= '9');
+    }
+
+    private int diffAsFloats(String s1, String s2) {
+        try {
+            float f1 = Float.parseFloat("." + s1);
+            float f2 = Float.parseFloat("." + s2);
+            float diff = f1 - f2;
+            return diff > 0 ? 1 : -1;
+        } catch (NumberFormatException e) {
+           System.out.println("ERROR: one of string cannot be parsed as number (execution should not reach here).");
+           System.out.println(e.getMessage());
+           throw new RuntimeException(e);
+        }
+    }
+
+    private int diffAsIntegers(String s1, String s2) {
+        try {
+            int i1 = Integer.parseInt(s1);
+            int i2 = Integer.parseInt(s2);
+            int diff = i1 - i2;
+            // in case when integer value of both string are same, like "1" and "01" length is the deciding factor.
+            if (diff == 0) {
+                diff = s1.length() - s2.length();
+            }
+            return diff;
+        } catch (NumberFormatException e) {
+           System.out.println("ERROR: one of string cannot be parsed as number (execution should not reach here).");
+           System.out.println(e.getMessage());
+           throw new RuntimeException(e);
+        }
     }
 }
